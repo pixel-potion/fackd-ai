@@ -1,0 +1,5 @@
+{
+  "mcpServers": {
+    "fackd": { "type": "http", "url": "https://fackd.com/mcp" }
+  }
+}
