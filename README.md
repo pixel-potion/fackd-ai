@@ -45,6 +45,10 @@ Fack'd rates claims, never people.
 
 `openai/` holds the package for OpenAI's plugin directory. See [openai/README.md](openai/README.md).
 
+## Cursor and Grok
+
+`cursor/` holds the plugin in the Cursor plugin format, for the Cursor Marketplace and xAI's Grok Bot marketplace. See [cursor/README.md](cursor/README.md).
+
 ## MCP Registry
 
 `server.json` is the server's entry in the [official MCP Registry](https://registry.modelcontextprotocol.io) as `com.fackd/fackd`.
