@@ -1,0 +1,110 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "fackd",
+  "version": "1.0.0",
+  "description": "Fact-check what people say in videos, with sources. Read the facks on any video, find checked ones, and fack new ones. Works with YouTube links today.",
+  "author": {
+    "name": "Fack'd",
+    "email": "team@fackd.com",
+    "url": "https://fackd.com"
+  },
+  "homepage": "https://fackd.com/ai",
+  "repository": "https://github.com/pixel-potion/fackd-ai",
+  "license": "MIT",
+  "keywords": [
+    "fact check",
+    "YouTube",
+    "podcasts",
+    "sources",
+    "misinformation",
+    "debate",
+    "news",
+    "claims",
+    "video"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Fack'd",
+        "shortDescription": "Live fact checks with sources",
+        "longDescription": "Fack'd fact-checks what people say in videos. It works with YouTube links today. Each check quotes a claim, shows when in the video it was said and by whom, rates it, and cites the sources it found.\n\nConnect Fack'd to read the checks on any video that has been facked, search the videos Fack'd has checked by speaker, show or topic, and, with a Fack'd Pro account, fack a new video in the background. Before facking, Fack'd tells you how much checking time the video needs and starts only after you agree.\n\nFack'd rates claims, never people, and holds every speaker and party to the same standard. Reading facks works with any Fack'd account. Connecting can't change your account or billing, and you can disconnect it any time in Settings on fackd.com.",
+        "developerName": "Fack'd",
+        "category": "Education & Research",
+        "capabilities": [
+          "Read a video's fact checks",
+          "Search fact-checked videos",
+          "Fact-check a new video",
+          "Follow a fact check's progress"
+        ],
+        "websiteURL": "https://fackd.com",
+        "supportURL": "https://fackd.com/contact",
+        "privacyPolicyURL": "https://fackd.com/privacy",
+        "termsOfServiceURL": "https://fackd.com/terms",
+        "defaultPrompt": [
+          "What did Fack'd find in this video? https://www.youtube.com/watch?v=QiUZhiCuI9k",
+          "Find facked videos about sleep",
+          "How many Fack'd hours do I have left this month?"
+        ],
+        "brandColor": "#13233F",
+        "brandColorDark": "#F5B700",
+        "composerIcon": "./assets/logo.png",
+        "logo": "./assets/logo.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Read the facks on a video that has already been checked.",
+              "prompt": "What did Fack'd find in https://www.youtube.com/watch?v=QiUZhiCuI9k ?",
+              "tools_triggered": "get_facks",
+              "expected_behavior": "Lists the video's checked claims with the time each was said, the speaker, the rating and source links, plus a link to the video's page on fackd.com."
+            },
+            {
+              "description": "Find videos Fack'd has already checked on a topic.",
+              "prompt": "Find facked videos about sleep",
+              "tools_triggered": "search_facked_videos",
+              "expected_behavior": "Returns up to 10 checked videos with links and check counts, including the Sleep Doctor interview."
+            },
+            {
+              "description": "Ask to fact-check a video that has not been checked. The tool returns a quote and does not start anything.",
+              "prompt": "Fack this video: https://www.youtube.com/watch?v=arj7oStGLkU",
+              "tools_triggered": "fack_video",
+              "expected_behavior": "Shows a quote: the checking time the video needs, the hours the account has left and roughly how long it takes. Asks the user before starting. Nothing is used yet. If the video was checked since, it says so and points to get_facks."
+            },
+            {
+              "description": "Start the fack after agreeing to the quote. Continue the same conversation as the previous case.",
+              "prompt": "Yes, go ahead and fack it.",
+              "tools_triggered": "fack_video (confirm: true), fack_status",
+              "expected_behavior": "Says the fack has started and that it takes a few minutes; fack_status shows it queued or running with its progress."
+            },
+            {
+              "description": "Check the account's plan and remaining hours.",
+              "prompt": "How many Fack'd hours do I have left?",
+              "tools_triggered": "my_hours",
+              "expected_behavior": "States the plan (Pro), the hours used and left this month, and the day they come back."
+            }
+          ],
+          "negative": [
+            {
+              "description": "A link from a site Fack'd doesn't support yet. It should say it works with YouTube links today and not start a fack.",
+              "prompt": "Fact-check this TikTok for me: https://www.tiktok.com/@nasa/video/7000000000000000000"
+            },
+            {
+              "description": "Asking for a verdict on a person. Fack'd rates claims, never people, so it should not call anyone a liar; it may offer to show checked claims from a specific video.",
+              "prompt": "Is Donald Trump a liar?"
+            },
+            {
+              "description": "Asking to fack without saying which video. It should ask for the link and not call fack_video.",
+              "prompt": "Fack this video"
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "Fack'd doesn't sell anything or take payments in ChatGPT. Signed-in users use the features their existing Fack'd account already includes."
+      },
+      "publication": {
+        "release_notes": "First release: read a video's fact checks, search checked videos, fact-check a new YouTube video with a quote first, follow its progress, and see hours left."
+      }
+    }
+  }
+}

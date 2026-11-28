@@ -41,6 +41,10 @@ Fack'd rates claims, never people.
 - Terms: https://fackd.com/terms
 - Support: team@fackd.com
 
+## ChatGPT and Codex
+
+`openai/` holds the package for OpenAI's plugin directory. See [openai/README.md](openai/README.md).
+
 ## MCP Registry
 
 `server.json` is the server's entry in the [official MCP Registry](https://registry.modelcontextprotocol.io) as `com.fackd/fackd`.
