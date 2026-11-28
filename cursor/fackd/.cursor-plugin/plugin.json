@@ -1,0 +1,15 @@
+{
+  "name": "fackd",
+  "displayName": "Fack'd",
+  "version": "1.0.0",
+  "description": "Fact-check what people say in videos, with sources. Read the facks on any video, find checked ones, and fack new ones. Works with YouTube links today.",
+  "author": {
+    "name": "Fack'd",
+    "email": "team@fackd.com"
+  },
+  "homepage": "https://fackd.com/ai",
+  "repository": "https://github.com/pixel-potion/fackd-ai",
+  "license": "MIT",
+  "keywords": ["fact-check", "youtube", "podcasts", "sources", "news", "research", "mcp"],
+  "logo": "assets/logo.png"
+}
